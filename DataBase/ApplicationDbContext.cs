@@ -1,6 +1,7 @@
 using System;
 using Hotel_Riwi.Models;
 using Hotel_Riwi.Seeders;
+using Hotel_Riwi.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hotel_Riwi.DataBase
@@ -21,6 +22,10 @@ namespace Hotel_Riwi.DataBase
         {
             RoomSeeder.Seed(modelBuilder);
             RoomTypeSeeder.Seed(modelBuilder);
+            
+            var passwordHasher = new PasswordHasher();
+            var employeeSeeder = new EmployeeSeeder(passwordHasher);
+            employeeSeeder.Seed(modelBuilder);
         }
     }
 }

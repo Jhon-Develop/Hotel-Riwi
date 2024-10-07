@@ -43,7 +43,7 @@ namespace Hotel_Riwi.Services
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
                 Email = registerDto.Email,
-                IndentificationNumber = registerDto.IndentificationNumber,
+                IdentificationNumber = registerDto.IdentificationNumber,
                 PhoneNumber = registerDto.PhoneNumber,
                 Birthdate = registerDto.Birthdate
             };

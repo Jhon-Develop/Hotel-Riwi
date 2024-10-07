@@ -29,8 +29,8 @@ namespace Hotel_Riwi.Models.DTOs
         [Required]
         [MaxLength(10, ErrorMessage = "The number idenfication is very long")]
         [MinLength(3, ErrorMessage = "The number idenfication is too short")]
-        [Display(Name = "Indentification Number")]
-        public string IndentificationNumber { get; set; }
+        [Display(Name = "Identification Number")]
+        public string IdentificationNumber { get; set; }
 
         [Required]
         [MaxLength(15, ErrorMessage = "The Phone Number is very long")]

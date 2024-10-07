@@ -26,8 +26,8 @@ namespace Hotel_Riwi.Models
         public string Email { get; set; }
 
         [Required]
-        [Column("indentification_number")]
-        public string IndentificationNumber { get; set; }
+        [Column("identification_number")]
+        public string IdentificationNumber { get; set; }
 
         [Required]
         [Column("phone_number")]

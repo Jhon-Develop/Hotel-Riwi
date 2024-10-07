@@ -27,11 +27,11 @@ namespace Hotel_Riwi.Models
 
         [Required]
         [Column("start_date")]
-        public DateTime StartDate { get; set; }
+        public DateOnly StartDate { get; set; }
 
         [Required]
         [Column("end_date")]
-        public DateTime EndDate { get; set; }
+        public DateOnly EndDate { get; set; }
 
         [Required]
         [Column("total_cost")]
