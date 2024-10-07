@@ -31,6 +31,6 @@ namespace Hotel_Riwi.Models
 
         [Required]
         [Column("password")]
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
     }
 }

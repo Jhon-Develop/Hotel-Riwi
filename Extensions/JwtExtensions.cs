@@ -36,7 +36,7 @@ namespace Hotel_Riwi.Extensions
                 };
             });
 
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGuestRepository, GuestRepository>();
 
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IAuthService, AuthService>();
