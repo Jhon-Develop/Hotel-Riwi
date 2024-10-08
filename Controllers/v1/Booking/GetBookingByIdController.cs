@@ -22,7 +22,6 @@ namespace Hotel_Riwi.Controllers.v1.Booking
         [SwaggerResponse(StatusCodes.Status200OK, "Booking retrieved successfully.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Booking not found.")]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error.")]
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<BookingModel>> GetBooking(int id)
         {

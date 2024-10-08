@@ -21,7 +21,6 @@ namespace Hotel_Riwi.Controllers.v1.Booking
         [SwaggerResponse(StatusCodes.Status204NoContent, "Booking deleted successfully.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Booking not found.")]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error.")]
-        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBooking(int id)
         {

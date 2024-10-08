@@ -4,14 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hotel_Riwi.Models;
 
-namespace Hotel_Riwi.Repositories.Interfaces
+namespace Hotel_Riwi.Services.Interfaces
 {
-    public interface IRoomRepository
+    public interface IRoomService
     {
         Task<IEnumerable<Room>> GetAvailableRoomsAsync();
-        Task<IEnumerable<Room>> GetRoomsStatusAsync();
+        Task<object> GetRoomsStatusAsync();
+
+        // Métodos para los tipos de habitaciones
         Task<IEnumerable<RoomType>> GetAllRoomTypesAsync();
         Task<RoomType> GetRoomTypeByIdAsync(int id);
-        Task<Room> GetRoomByIdAsync(int id);
     }
 }

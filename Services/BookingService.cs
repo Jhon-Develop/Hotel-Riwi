@@ -17,9 +17,9 @@ namespace Hotel_Riwi.Services
             _roomRepository = roomRepository;
         }
 
-        public async Task<IEnumerable<Booking>> GetBookingsByGuestIdentificationNumberAsync(string identificationNumber)
+        public async Task<IEnumerable<Booking>> GetAllBookingsAsync()
         {
-            return await _bookingRepository.GetBookingsByGuestIdentificationNumberAsync(identificationNumber);
+            return await _bookingRepository.GetAllBookingsAsync();
         }
 
         public async Task<Booking> GetBookingByIdAsync(int id)
@@ -56,11 +56,6 @@ namespace Hotel_Riwi.Services
         public async Task DeleteBookingAsync(int id)
         {
             await _bookingRepository.DeleteBookingAsync(id);
-        }
-
-        public async Task<IEnumerable<Booking>> GetAllBookingsAsync()
-        {
-            return await _bookingRepository.GetAllBookingsAsync();
         }
     }
 }

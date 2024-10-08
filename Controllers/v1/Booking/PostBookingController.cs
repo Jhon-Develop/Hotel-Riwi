@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Hotel_Riwi.Controllers.v1.Booking
 {
     [ApiController]
-    [Route("api/v1/bookings/create")]
+    [Route("api/v1/bookings")]
     [ApiExplorerSettings(GroupName = "v1")]
     [Tags("Booking")]
     public class PostBookingController : BaseBookingsController
@@ -20,7 +20,6 @@ namespace Hotel_Riwi.Controllers.v1.Booking
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Invalid booking data.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Room not found.")]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "An error occurred while creating the booking.")]
-        [Authorize]
         [HttpPost]
         public async Task<ActionResult<BookingModel>> PostBooking([FromBody] BookingDto bookingDto)
         {
@@ -42,7 +41,8 @@ namespace Hotel_Riwi.Controllers.v1.Booking
                 };
 
                 await _bookingService.AddBookingAsync(booking);
-                return CreatedAtAction(nameof(GetBookingByIdController.GetBooking), new { id = booking.Id }, booking);
+
+                return StatusCode(StatusCodes.Status201Created, booking);
             }
             catch (Exception)
             {

@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using Hotel_Riwi.Models;
 using Hotel_Riwi.Services.Interfaces;
@@ -25,13 +22,13 @@ namespace Hotel_Riwi.Services
         public string GenerateTokenJwt(Employee employee)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_secretKey);
+            var key = Encoding.UTF8.GetBytes(_secretKey); // Usar UTF8 es más común
 
             var claims = new[]
             {
                 new Claim("Id", employee.Id.ToString()),
-                    new Claim("first_name", employee.FirstName),
-                    new Claim("Email", employee.Email),
+                new Claim("first_name", employee.FirstName),
+                new Claim("Email", employee.Email),
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -48,7 +45,7 @@ namespace Hotel_Riwi.Services
         public ClaimsPrincipal ValidateTokenJwt(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_secretKey);
+            var key = Encoding.UTF8.GetBytes(_secretKey);
 
             try
             {
@@ -56,18 +53,21 @@ namespace Hotel_Riwi.Services
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
+                    ValidateIssuer = true,
+                    ValidIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
+                    ValidateAudience = true,
+                    ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
+                    ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
                 }, out SecurityToken validatedToken);
 
                 return principal;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"Token validation failed: {ex.Message}");
                 return null;
             }
-            
         }
     }
 }

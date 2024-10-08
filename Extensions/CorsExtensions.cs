@@ -11,7 +11,7 @@ namespace Hotel_Riwi.Extensions
                 options.AddPolicy("AllowSpecificOrigin",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:5094", 
+                        builder.WithOrigins("http://localhost:5128", 
                                             "http://localhost:3000")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod()

@@ -21,7 +21,6 @@ namespace Hotel_Riwi.Controllers.v1.Booking
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Invalid booking data.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Booking not found.")]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error.")]
-        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBooking(int id, [FromBody] BookingDto bookingDto)
         {

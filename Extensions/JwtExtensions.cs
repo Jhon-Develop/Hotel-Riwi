@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Hotel_Riwi.Services;
@@ -5,8 +6,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Hotel_Riwi.Services.Interfaces;
 using Hotel_Riwi.Repositories.Interfaces;
 using Hotel_Riwi.Repositories;
-
-
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotel_Riwi.Extensions
 {
@@ -26,18 +27,22 @@ namespace Hotel_Riwi.Extensions
             })
             .AddJwtBearer(options =>
             {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey)),
-                    ClockSkew = TimeSpan.Zero
+                    ValidateIssuer = true,
+                    ValidIssuer = configuration["JWT_ISSUER"],
+                    ValidateAudience = true,
+                    ValidAudience = configuration["JWT_AUDIENCE"],
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
                 };
             });
 
             services.AddScoped<IGuestRepository, GuestRepository>();
-
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IAuthService, AuthService>();
 

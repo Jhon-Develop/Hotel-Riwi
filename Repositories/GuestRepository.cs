@@ -58,10 +58,5 @@ namespace Hotel_Riwi.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
-
-        public Task<Guest> GetGuestByIdentificationNumberAsync(string identificationNumber)
-        {
-            return _context.Guests.FirstOrDefaultAsync(g => g.IdentificationNumber == identificationNumber);
-        }
     }
 }
